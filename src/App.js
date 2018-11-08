@@ -1,46 +1,20 @@
-import React, { Component } from "react";
-import NavBar from "./components/NavBar";
+import React from "react";
 import "./App.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import NoMatch from "./components/NoMatch";
+import Layout from "./components/Layout/Layout";
+import Login from "./components/Login/Login";
 
-class App extends Component {
-  state = {
-    keyword: "",
-    location: "",
-    jobs: []
-  };
-
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state);
-  };
-
-  getResults = e => {
-    const proxyUrl = "https://cors-anywhere.herokuapp.com/",
-      targetUrl = `https://jobs.github.com/positions.json?description=${
-        this.state.keyword
-      }&location=${this.state.location}`;
-    e.preventDefault();
-    fetch(proxyUrl + targetUrl)
-      .then(res => res.json())
-      .then(data => this.setState({ jobs: data }));
-    this.renderJobs();
-  };
-
-  renderJobs = () => {
-    const { jobs } = this.state;
-    jobs.map(job => {
-      console.log(job);
-    });
-  };
-
-  render() {
-    console.log(this.state.jobs);
-    return (
-      <div>
-        <NavBar getResults={this.getResults} handleChange={this.handleChange} />
-      </div>
-    );
-  }
-}
+const App = () => {
+  return (
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Layout} />
+        <Route exact path="/login" component={Login} />
+        <Route component={NoMatch} />
+      </Switch>
+    </Router>
+  );
+};
 
 export default App;
