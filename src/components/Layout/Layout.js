@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import Navbar from "./Navbar";
 import SearchJob from "./SearchBar";
+import Jobs from "./Jobs";
 
 class Layout extends Component {
   state = {
     keyword: "",
     location: "",
-    jobs: []
+    jobs: [],
+    isSubmitted: false
   };
 
   handleChange = e => {
@@ -22,15 +24,31 @@ class Layout extends Component {
     e.preventDefault();
     fetch(proxyUrl + targetUrl)
       .then(res => res.json())
-      .then(data => this.setState({ jobs: data }));
+      .then(data => this.setState({ jobs: data, isSubmitted: true }));
+    //this.renderJobs();
   };
-
+  // renderJobs = () => {
+  //   const { jobs } = this.state;
+  //   jobs.map(job => {
+  //     console.log(job);
+  //   });
+  // };
   render() {
+    const { isSubmitted } = this.state;
+    const results = isSubmitted ? (
+      <Jobs jobs={this.state.jobs} />
+    ) : (
+      "search for jobs"
+    );
     return (
-      <>
+      <div>
         <Navbar />
-        <SearchJob />
-      </>
+        <SearchJob
+          getResults={this.getResults}
+          handleChange={this.handleChange}
+        />
+        {results}
+      </div>
     );
   }
 }
