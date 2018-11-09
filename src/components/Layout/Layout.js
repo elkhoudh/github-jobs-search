@@ -12,7 +12,7 @@ class Layout extends Component {
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
     console.log(this.state);
-  };
+  };\
   // fetch api
   getResults = e => {
     const proxyUrl = "https://cors-anywhere.herokuapp.com/",
