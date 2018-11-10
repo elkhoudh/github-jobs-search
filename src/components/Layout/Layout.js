@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Navbar from "./Navbar";
 import SearchJob from "./SearchBar";
 import Jobs from "./Jobs";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 
 class Layout extends Component {
   state = {
@@ -41,14 +43,27 @@ class Layout extends Component {
       "search for jobs"
     );
     return (
-      <div>
+      <>
         <Navbar />
         <SearchJob
           getResults={this.getResults}
           handleChange={this.handleChange}
         />
-        {results}
-      </div>
+        <Grid container spacing={24}>
+          <Grid item xs={8}>
+            <Paper>
+              <h2>Featured Jobs</h2>
+              <hr />
+              {results}
+            </Paper>
+          </Grid>
+          <Grid item xs={4}>
+            <Paper>
+              <h2>Featured Company</h2>
+            </Paper>
+          </Grid>
+        </Grid>
+      </>
     );
   }
 }

@@ -1,9 +1,9 @@
 import React from "react";
 
-function Jobs(props) {
+const Jobs = props => {
   const { jobs } = props;
   const jobsHTML = jobs.map(job => (
-    <div>
+    <div key={job.id}>
       <h6>Title: {job.title}</h6>
       <h6>Location: {job.location}</h6>
       <h6>Type: {job.type}</h6>
@@ -20,6 +20,6 @@ function Jobs(props) {
     </div>
   ));
   return <div>{jobsHTML}</div>;
-}
+};
 
 export default Jobs;

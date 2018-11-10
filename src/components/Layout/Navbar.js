@@ -26,7 +26,8 @@ const styles = theme => ({
     marginRight: 20
   },
   title: {
-    fontFamily: "Bitter , serif",
+    fontFamily: "Exo 2, sans-serif",
+    fontWeight: 900,
     display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block"
@@ -181,7 +182,7 @@ class Navbar extends React.Component {
               color="inherit"
               noWrap
             >
-              FsW16 Job Search
+              FSW16 Job Search
             </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon} />
